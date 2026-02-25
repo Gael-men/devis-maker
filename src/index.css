@@ -2,106 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
 @layer base {
   :root {
     --background: 210 20% 96%;
     --foreground: 210 25% 10%;
-
     --card: 0 0% 100%;
     --card-foreground: 210 25% 10%;
-
     --popover: 0 0% 100%;
     --popover-foreground: 210 25% 10%;
-
-    /* Teal - brand primary */
     --primary: 179 55% 35%;
     --primary-foreground: 0 0% 100%;
-
-    /* Orange/gold accent */
     --accent-orange: 32 90% 55%;
     --accent-orange-foreground: 0 0% 100%;
-
     --secondary: 210 15% 92%;
     --secondary-foreground: 210 25% 20%;
-
     --muted: 210 15% 94%;
     --muted-foreground: 210 10% 50%;
-
     --accent: 179 55% 90%;
     --accent-foreground: 179 55% 20%;
-
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-
     --border: 210 15% 85%;
     --input: 210 15% 85%;
     --ring: 179 55% 35%;
-
-    /* Table specific */
     --table-header-bg: 179 45% 25%;
     --table-header-fg: 0 0% 100%;
     --table-mode-bg: 32 90% 55%;
     --table-row-alt: 210 15% 97%;
-
     --radius: 0.5rem;
-
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
+    /* Deep ocean / water glassmorphism palette */
+    --background: 210 60% 6%;
+    --foreground: 195 80% 92%;
+    --card: 205 55% 10%;
+    --card-foreground: 195 80% 92%;
+    --popover: 205 55% 10%;
+    --popover-foreground: 195 80% 92%;
+    --primary: 185 70% 50%;
+    --primary-foreground: 210 60% 6%;
+    --secondary: 205 45% 18%;
+    --secondary-foreground: 195 70% 85%;
+    --muted: 205 40% 14%;
+    --muted-foreground: 200 40% 60%;
+    --accent: 185 60% 25%;
+    --accent-foreground: 185 80% 85%;
+    --destructive: 0 62.8% 50%;
     --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 200 40% 20%;
+    --input: 200 40% 20%;
+    --ring: 185 70% 50%;
+    --table-header-bg: 195 60% 15%;
+    --table-header-fg: 185 80% 90%;
+    --table-mode-bg: 32 80% 45%;
+    --table-row-alt: 205 50% 12%;
+    --sidebar-background: 210 60% 6%;
+    --sidebar-foreground: 195 80% 92%;
+    --sidebar-primary: 185 70% 50%;
+    --sidebar-primary-foreground: 210 60% 6%;
+    --sidebar-accent: 205 45% 18%;
+    --sidebar-accent-foreground: 195 70% 85%;
+    --sidebar-border: 200 40% 20%;
+    --sidebar-ring: 185 70% 50%;
   }
 }
 
@@ -109,8 +80,116 @@ All colors MUST be HSL.
   * {
     @apply border-border;
   }
-
   body {
     @apply bg-background text-foreground;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
+}
+
+/* ─── Glassmorphism water effect for dark mode ─── */
+.dark .glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(10, 60, 90, 0.55) 0%,
+    rgba(5, 35, 60, 0.70) 40%,
+    rgba(8, 50, 75, 0.60) 100%
+  );
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.1);
+  border: 1px solid rgba(100, 220, 255, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 150, 200, 0.15),
+    0 1px 0 rgba(100, 220, 255, 0.12) inset,
+    0 -1px 0 rgba(0, 80, 140, 0.3) inset;
+}
+
+.dark .glass-header {
+  background: linear-gradient(
+    135deg,
+    rgba(5, 80, 110, 0.85) 0%,
+    rgba(10, 110, 140, 0.75) 50%,
+    rgba(20, 100, 80, 0.80) 100%
+  );
+  backdrop-filter: blur(20px) saturate(200%);
+  -webkit-backdrop-filter: blur(20px) saturate(200%);
+  border-bottom: 1px solid rgba(100, 220, 255, 0.2);
+  box-shadow: 0 4px 24px rgba(0, 160, 210, 0.2);
+}
+
+.dark .glass-table-header {
+  background: rgba(5, 55, 80, 0.9) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(100, 220, 255, 0.25) !important;
+}
+
+.dark .glass-row {
+  background: rgba(8, 45, 70, 0.4);
+  border-bottom: 1px solid rgba(100, 220, 255, 0.08);
+  transition: background 0.2s;
+}
+
+.dark .glass-row:hover {
+  background: rgba(15, 80, 120, 0.45);
+}
+
+.dark .glass-row-alt {
+  background: rgba(5, 35, 58, 0.55);
+}
+
+.dark .glass-totals {
+  background: rgba(5, 40, 65, 0.75) !important;
+  border-top: 1px solid rgba(100, 220, 255, 0.2) !important;
+}
+
+.dark .glass-action-bar {
+  background: rgba(8, 50, 75, 0.6);
+  backdrop-filter: blur(16px);
+  border-top: 1px solid rgba(100, 220, 255, 0.15);
+}
+
+.dark .glass-total-card {
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(100, 220, 255, 0.2);
+}
+
+/* ─── Resizable column handle ─── */
+.col-resize-handle {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  cursor: col-resize;
+  user-select: none;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.col-resize-handle:hover,
+.col-resize-handle.resizing {
+  opacity: 1;
+}
+.col-resize-handle::after {
+  content: '';
+  display: block;
+  width: 2px;
+  height: 60%;
+  border-radius: 2px;
+  background: rgba(100, 220, 255, 0.6);
+}
+th:hover .col-resize-handle {
+  opacity: 0.6;
+}
+
+/* Water ripple animation for dark mode background */
+.dark body {
+  background-image:
+    radial-gradient(ellipse at 20% 50%, rgba(0, 100, 150, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 20%, rgba(0, 80, 120, 0.12) 0%, transparent 50%),
+    radial-gradient(ellipse at 60% 80%, rgba(0, 60, 100, 0.10) 0%, transparent 50%);
 }
