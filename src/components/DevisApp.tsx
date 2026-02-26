@@ -6,11 +6,12 @@ import { exportToPDF, exportToJSON, importFromJSON } from '@/lib/pdf-export';
 import {
   Plus, RotateCcw, Download, Upload, Save,
   ImageIcon, Moon, Sun, Ship, Plane, Target,
-  GripVertical
+  GripVertical, Eye
 } from 'lucide-react';
 import { useState } from 'react';
 import { useDarkMode } from '@/hooks/use-dark-mode';
 import { useColumnResize, ColumnDef } from '@/hooks/use-column-resize';
+import DevisPreview from './DevisPreview';
 
 const COLUMN_DEFS: ColumnDef[] = [
   { key: 'num',   defaultWidth: 40,  minWidth: 30 },
@@ -36,6 +37,7 @@ const INITIAL_DATA: DevisData = {
 const DevisApp: React.FC = () => {
   const [devis, setDevis] = useState<DevisData>(INITIAL_DATA);
   const [logoImage, setLogoImage] = useState<string | null>(null);
+  const [showPreview, setShowPreview] = useState(false);
   const logoRef = useRef<HTMLInputElement>(null);
   const jsonImportRef = useRef<HTMLInputElement>(null);
   const { isDark, toggle: toggleDark } = useDarkMode();
@@ -381,6 +383,15 @@ const DevisApp: React.FC = () => {
             </button>
 
             <button
+              onClick={() => setShowPreview(true)}
+              className="flex items-center gap-2 px-5 py-4 text-sm font-semibold hover:opacity-90 transition-opacity flex-1 justify-center min-w-[130px]"
+              style={{ background: 'hsl(185 70% 30%)', color: 'white' }}
+            >
+              <Eye className="w-4 h-4" />
+              Aperçu
+            </button>
+
+            <button
               onClick={() => exportToPDF(devis, logoImage)}
               className="flex items-center gap-2 px-5 py-4 text-sm font-semibold hover:opacity-90 transition-opacity flex-1 justify-center min-w-[130px]"
               style={{ background: 'hsl(270 60% 50%)', color: 'white' }}
@@ -459,6 +470,15 @@ const DevisApp: React.FC = () => {
 
         </div>
       </div>
+
+      {showPreview && (
+        <DevisPreview
+          devis={devis}
+          logoImage={logoImage}
+          isDark={isDark}
+          onClose={() => setShowPreview(false)}
+        />
+      )}
     </div>
   );
 };
